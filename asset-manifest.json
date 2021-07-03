@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/bookcollage/static/css/main.864c7555.chunk.css",
+    "main.js": "/bookcollage/static/js/main.c1691cee.chunk.js",
+    "main.js.map": "/bookcollage/static/js/main.c1691cee.chunk.js.map",
+    "runtime-main.js": "/bookcollage/static/js/runtime-main.0dfb304f.js",
+    "runtime-main.js.map": "/bookcollage/static/js/runtime-main.0dfb304f.js.map",
+    "static/js/2.da674c7c.chunk.js": "/bookcollage/static/js/2.da674c7c.chunk.js",
+    "static/js/2.da674c7c.chunk.js.map": "/bookcollage/static/js/2.da674c7c.chunk.js.map",
+    "static/js/3.e0f39154.chunk.js": "/bookcollage/static/js/3.e0f39154.chunk.js",
+    "static/js/3.e0f39154.chunk.js.map": "/bookcollage/static/js/3.e0f39154.chunk.js.map",
+    "index.html": "/bookcollage/index.html",
+    "static/css/main.864c7555.chunk.css.map": "/bookcollage/static/css/main.864c7555.chunk.css.map",
+    "static/js/2.da674c7c.chunk.js.LICENSE.txt": "/bookcollage/static/js/2.da674c7c.chunk.js.LICENSE.txt",
+    "static/media/beach.029bc2ff.png": "/bookcollage/static/media/beach.029bc2ff.png",
+    "static/media/bookbg.785868ef.png": "/bookcollage/static/media/bookbg.785868ef.png",
+    "static/media/coffee.828f6acb.png": "/bookcollage/static/media/coffee.828f6acb.png",
+    "static/media/flowersbg.6c6efaa2.png": "/bookcollage/static/media/flowersbg.6c6efaa2.png",
+    "static/media/flowersbg2.c36ec65b.png": "/bookcollage/static/media/flowersbg2.c36ec65b.png",
+    "static/media/geometric1.3bb218d8.png": "/bookcollage/static/media/geometric1.3bb218d8.png",
+    "static/media/geometric2.6ad34bf4.jpg": "/bookcollage/static/media/geometric2.6ad34bf4.jpg",
+    "static/media/geometric3.22421d00.png": "/bookcollage/static/media/geometric3.22421d00.png",
+    "static/media/SearchBar.css": "/bookcollage/static/media/headerbg.a6224dc8.png",
+    "static/media/reading.78ae6f9c.png": "/bookcollage/static/media/reading.78ae6f9c.png",
+    "static/media/removeicon.ee53046d.png": "/bookcollage/static/media/removeicon.ee53046d.png",
+    "static/media/sparklebg.926c91b0.png": "/bookcollage/static/media/sparklebg.926c91b0.png",
+    "static/media/star.033b093c.png": "/bookcollage/static/media/star.033b093c.png",
+    "static/media/world.883f62c7.png": "/bookcollage/static/media/world.883f62c7.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0dfb304f.js",
+    "static/js/2.da674c7c.chunk.js",
+    "static/css/main.864c7555.chunk.css",
+    "static/js/main.c1691cee.chunk.js"
+  ]
+}
