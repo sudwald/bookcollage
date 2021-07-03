@@ -1,0 +1,104 @@
+.customise{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 20px;
+    padding-bottom:-10px;
+    margin-bottom:0;
+}
+
+#collageTitle {
+    display:inline-flex;
+    align-items:center;
+}
+
+#titleEntry {
+    height:30px;
+    width:300px;
+    font-family: 'Londrina Solid';
+    font-size:24px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.options{
+    margin-top:10px;
+    font-size: 12px;
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap:10px;
+    grid-auto-flow: row;
+}
+
+.optionSelectors{
+    font-family: 'Londrina Solid';
+    font-weight:300;
+    font-size:14px;
+    min-width:120px;
+}
+
+.optionLabels{
+    font-size:10px;
+}
+
+#OpenSans{
+    font-family: 'Open Sans';
+}
+
+#Staatliches{
+    font-family: 'Staatliches';
+}
+
+#Arvo{
+    font-family: 'Arvo';
+}
+
+#Yellowtail{
+    font-family: 'Yellowtail';
+}
+
+#Pacifico{
+    font-family: 'Pacifico';
+}
+
+#IndieFlower{
+    font-family: 'Indie Flower';
+}
+
+#AmaticSC {
+    font-family: 'Amatic SC';
+}
+                      
+#ArchitectsDaughter{
+    font-family: 'Architects Daughter';
+}                        
+
+#Satisfy{
+    font-family: 'Satisfy';
+}
+
+#PermanentMarker{
+    font-family: 'Permanent Marker';
+}
+
+#Parisienne{
+    font-family: 'Parisienne';
+}
+
+#SpecialElite{
+    font-family: 'Special Elite';
+}
+
+#LuckiestGuy{
+    font-family: 'Luckiest Guy';
+}                        
+
+#Bangers {
+    font-family: 'Bangers';
+}
+
+#RocknRollOne {
+    font-family: 'RocknRoll One';
+}

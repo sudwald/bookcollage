@@ -1,0 +1,75 @@
+//import * as htmlToImage from 'html-to-image';
+//import { toPng, toJpeg } from 'html-to-image';
+//import downloadjs from 'downloadjs';
+//import { useScreenshot } from 'use-react-screenshot'
+//import ReactDOM, { findDOMNode } from 'react-dom'
+//import {renderToString} from 'react-dom/server'
+//import html2canvas from 'html2canvas';
+
+/*export function PhotoBox (props) {
+    
+    const GenerateImg = () => {                
+      const imgElement = document.createElement("div")
+        props.photoBoxArray.map(item => {
+            imgElement.innerHTML = imgElement.innerHTML + "<img src=" + item + "/>"
+        })
+        document.body.appendChild(imgElement)
+        html2canvas(imgElement, {useCORS:true, allowTaint:false})
+        .then(function (canvas) {
+            canvas.toDataURL()
+        })
+        .then(canvas => {
+            document.body.appendChild(canvas)
+        })        
+        .then(function (dataUrl) {
+            htmlToImage.toPng(dataUrl, {allowTaint:true})
+        })
+        
+        });
+        }
+
+        const base64Converter = () => {            
+            const imgs = document.querySelectorAll('img')
+            for (let i=0;i<imgs.length;i++) {
+            fetch(imgs[i].src)
+              .then(res => res.blob())
+              .then(blob => new Promise((resolve, reject) => {
+                  const reader = new FileReader;
+                  reader.onerror = reject;
+                  reader.onload = () => {
+                    resolve(reader.result);
+                  };
+                  reader.readAsDataURL(blob);
+                })
+              )
+              .then(dataURL => {
+                imgs[i].src = dataURL
+              })
+            }
+            }
+        }
+    
+        return html2canvas(document.getElementById('PhotoBox'))
+        .then(function (dataUrl2) {
+            downloadjs(dataUrl2, `BookCollage-${Date.now()}`);
+    
+            return (
+               <div className='PhotoBoxContainer'>
+                   <div className='customise'>
+                        <h2>Your collage</h2>
+                    </div>
+                    <div className='PhotoBox' id='PhotoBox'>
+                   {
+                   props.photoBoxArray.map(item => {
+                            return <PhotoBoxItem imgUrl={item} onRemove={props.onRemove}/>
+                        })
+                    }
+                    </div>
+                    <div className='GenerateImg'>
+                        <button onClick={GenerateImg2}>Download!</button>    
+                    </div>
+                    <div id='duplicate' style={{display: 'inline'}}></div>
+                </div>
+            )
+    }
+*/    

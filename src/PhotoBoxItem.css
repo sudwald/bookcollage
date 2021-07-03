@@ -1,0 +1,43 @@
+#photoBoxImgContainer{
+    position:relative;
+}
+
+.stars{
+    position:absolute;
+    bottom:0px;
+}
+
+.captionLabel{
+    position:absolute;
+    bottom:150px;
+    left:-10px;
+    font-size:12px;
+    vertical-align: center;
+    font-family: 'Londrina Solid';
+    font-weight:400;
+    border: 1px solid black;
+    background-color:white;
+    transform: rotate(-15deg);
+    width:80px;
+    padding:0px;
+}
+
+#star5 {
+    left:37px;
+}
+
+#star4 {
+    left:49px;
+}
+
+#star3 {
+    left:61px;
+}
+
+#star2 {
+    left:73px;
+}
+
+#star1 {
+    left:85px;
+}

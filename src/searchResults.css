@@ -1,0 +1,29 @@
+.searchResults img {
+    height:145px;
+    width:95px;
+    margin:3px;
+    cursor: pointer
+}
+
+.searchResultsContainer {
+    background-image: linear-gradient(120deg, white, linen);
+    display:none;
+}
+
+.searchResults {
+    grid-area: searchResultsContainer;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-flow: row;
+    box-sizing: border-box;
+    margin: 0 auto;
+    justify-items: center;
+}
+
+.searchResults h2 {
+    margin-bottom:10px;
+}
+
+.searchResults h3 {
+    margin-top:10px;
+}
