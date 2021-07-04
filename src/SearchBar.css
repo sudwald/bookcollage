@@ -26,6 +26,9 @@ h3 {
 .searchBar{
     grid-area: searchBar;
     margin-bottom: -20px;
+    background-image:linear-gradient(120deg,#FFFFFF, rgba(149, 50, 168, 0.5), #FFFFFF);
+    align-items:center;
+    padding-bottom:20px;
 }
 
 #header{

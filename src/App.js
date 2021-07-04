@@ -26,7 +26,8 @@ class App extends React.Component {
       firstLoad: true,
       notificationStyle: {display: 'none'},
       loadContent: {display: 'none'},
-      hideHeader: {display: 'block'}
+      hideHeader: {display: 'block'},
+      imgToggleArray: []
     }
     this.search = this.search.bind(this)
     this.addPhoto = this.addPhoto.bind(this)
@@ -34,6 +35,7 @@ class App extends React.Component {
     this.restoreReset = this.restoreReset.bind(this)
     this.moveLeft = this.moveLeft.bind(this)
     this.moveRight = this.moveRight.bind(this)
+    this.updateImgToggleArray = this.updateImgToggleArray.bind(this)
   }
 
   // called when user clicks a search result to add it to their collage
@@ -47,9 +49,9 @@ class App extends React.Component {
     photos.push(photoUrl)
     // update the PhotoBox array
     this.setState({photoBoxArray: photos})
-    this.setState({notificationText: 'Added!'})
-    this.setState({notificationStyle: {display:"inline"}})
-    setInterval(() => this.setState({notificationStyle: {display: "none"}}),2000)
+    // this.setState({notificationText: 'Added!'})
+    // this.setState({notificationStyle: {display:"inline"}})
+    // setInterval(() => this.setState({notificationStyle: {display: "none"}}),2000)
   }
   
   // once a photo has been removed from the collage and reinstated to the search results, this function resets the tracker variable which tells ImageResult if an image needs restoring
@@ -69,11 +71,13 @@ class App extends React.Component {
     this.setState({notificationStyle: {display:"inline"}})
     setTimeout(() => this.setState({notificationStyle: {display: "none"}}),2000)
     this.setState({photoToRestore: photoUrl})
+    this.updateImgToggleArray('removed',photoUrl)
   }
   
   // fetches search results from the Google Books API
   search(titleSearchTerm, authorSearchTerm) {
     const combinedSearchTerm = titleSearchTerm + " " + authorSearchTerm
+    alert(`https://www.googleapis.com/books/v1/volumes?q=${combinedSearchTerm}&intitle:${titleSearchTerm}&inauthor:${authorSearchTerm}&printType=books&maxResults=40`)
     // carries out the search using the indicated search term
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${combinedSearchTerm}&intitle:${titleSearchTerm}&inauthor:${authorSearchTerm}&printType=books&maxResults=40`)
         .then(response => response.json())
@@ -85,6 +89,47 @@ class App extends React.Component {
       this.setState({hideHeader:{display: 'none'}})
     }
   }
+
+  updateImgToggleArray(direction, imgUrl) {
+    let newImgStyleArray = this.state.imgToggleArray;
+    let found = false;
+    let foundAt = 0;
+    const hidden = {display:"none"};
+    const visible = {display:"block"};
+
+    for (let i=0; i<newImgStyleArray.length;i++) {
+        if (newImgStyleArray[i].imgID === imgUrl) {
+            found = true;
+            foundAt = i;
+            break;
+        }
+    }
+
+    if(found) { 
+      if(direction === 'added') {
+            newImgStyleArray[foundAt].displayStyle = hidden    
+        }
+        else {
+            newImgStyleArray[foundAt].displayStyle = visible    
+        }
+    }
+
+    else {
+        if (direction='added') {  
+            newImgStyleArray.push({
+                imgID: imgUrl,
+                displayStyle: hidden,
+            })
+        }
+        else {
+            newImgStyleArray.push({
+                imgID: imgUrl,
+                displayStyle: visible, 
+           })
+        }
+    }
+    this.setState({imgToggleArray: newImgStyleArray})
+}
 
   moveLeft(imgUrl) {
     const currentPosition = this.state.photoBoxArray.indexOf(imgUrl)
@@ -106,9 +151,9 @@ class App extends React.Component {
         {/* passes SearchBar the ability to conduct an API search */}
         <SearchBar hideHeader={this.state.hideHeader} onSearch={this.search} />
         {/* passes SearchResults the results of the search, access to add a photo,  access to the toRestore tracker variable, and access to the restore function should an image need to be reinstated in the search results*/}
-        <SearchResults loadContent={this.state.loadContent} jsonArray={this.state.jsonArray} onAdd={this.addPhoto} toRestore={this.state.photoToRestore} restoreReset={this.restoreReset}/>
+        <SearchResults loadContent={this.state.loadContent} jsonArray={this.state.jsonArray} onAdd={this.addPhoto} toRestore={this.state.photoToRestore} restoreReset={this.restoreReset} updateImgToggleArray={this.updateImgToggleArray} imgToggleArray={this.state.imgToggleArray}/>
         {/* passes PhotoBox the array of the user's chosen collage photos and the ability to remove a photo from the collage */}
-        <PhotoBox loadContent={this.state.loadContent} photoBoxArray={this.state.photoBoxArray} onRemove={this.removePhoto} moveLeft={this.moveLeft} moveRight={this.moveRight}/>
+        <PhotoBox loadContent={this.state.loadContent} photoBoxArray={this.state.photoBoxArray} onRemove={this.removePhoto} moveLeft={this.moveLeft} moveRight={this.moveRight} updateImgToggleArray={this.updateImgToggleArray}/>
         <Notification notificationStyle={this.state.notificationStyle} notificationText={this.state.notificationText}/>
       </div>
     );

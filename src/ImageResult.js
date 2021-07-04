@@ -7,27 +7,31 @@ export class ImageResult extends React.Component {
     constructor(props) {
         super(props)
         this.handleAdd = this.handleAdd.bind(this)
-        this.state = {
-            imgStyle: {display:"inline"},
-        }
+        this.handleUpdateToggleArray = this.handleUpdateToggleArray.bind(this)
     }
 
     componentDidUpdate() {
         if(this.props.toRestore === this.props.imgUrl) {
-            this.setState({imgStyle: {display:"inline"}})
             this.props.restoreReset()
         }
     }
 
     handleAdd() {
         this.props.onAdd(this.props.imgUrl)
-        this.setState({imgStyle: {display:"none"}})
+        this.handleUpdateToggleArray('added')
+    }
+
+    handleUpdateToggleArray(direction) {
+        this.props.updateImgToggleArray(direction, this.props.imgUrl)
     }
 
     render() {
+        let styleCheck = this.props.imgToggleArray.find(x => x.imgID === this.props.imgUrl)
         return(
                 <React.Fragment>
-                <img src={this.props.imgUrl} onClick={this.handleAdd} style={this.state.imgStyle} draggable="true"/>
+                <img src={this.props.imgUrl} onClick={this.handleAdd} style={
+                    styleCheck? styleCheck.displayStyle : {filter: "grayscale(0%)"}
+                } draggable="true"/>
                 </React.Fragment>
         )
     }

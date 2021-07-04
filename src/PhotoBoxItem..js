@@ -13,7 +13,7 @@ export class PhotoBoxItem extends React.Component {
         this.props.togglePopUp(this.props.imgUrl)
     }
 
-    handleRemove(imgUrl) {
+    handleRemove() {
         this.props.onRemove(this.props.imgUrl)
     }
 

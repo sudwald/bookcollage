@@ -24,18 +24,21 @@ export class SearchBar extends React.Component {
       }
 
     handleAuthorChange(event) {
-      this.setState({authorSearchTerm: event.target.value})
+        this.setState({authorSearchTerm: event.target.value})
     }
 
     //   calls the search function using the searchTerm
-    handleSearch(event) {
-        this.props.onSearch(this.state.titleSearchTerm, this.state.authorSearchTerm)
+    handleSearch() {
+        if (this.state.authorSearchTerm || this.state.titleSearchTerm) {
+          alert("search submitted, sending title search term " + this.state.titleSearchTerm + " and author search term " + this.state.authorSearchTerm)
+          this.props.onSearch(this.state.titleSearchTerm, this.state.authorSearchTerm)
+        }
     }
 
     handleKeyUp(event) {
-      if (event.keyCode === 13) {
-        this.handleSearch(event)
-      }
+        if (event.keyCode === 13) {
+          this.handleSearch()
+        }
     }
 
     render() {

@@ -450,7 +450,7 @@ export class PhotoBox extends React.Component {
                     <div id='PhotoBox'>
                         {
                         this.props.photoBoxArray.map(item => {
-                        return <PhotoBoxItem imgUrl={item} togglePopUp={this.togglePopUp} stars={this.state.stars} captions={this.state.captions} />
+                        return <PhotoBoxItem imgUrl={item} togglePopUp={this.togglePopUp} stars={this.state.stars} captions={this.state.captions} updateImgToggleArray={this.props.updateImgToggleArray} />
                         })
                         }
                     </div>
