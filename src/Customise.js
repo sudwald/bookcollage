@@ -79,7 +79,6 @@ export class Customise extends React.Component {
                     {/* </select> */}
                     {/* </div> */}
 
-                    <div id='titleFont'>
                     <label className='optionLabels'>TITLE FONT</label>
                     <select className='optionSelectors' id='titleFontFace' onChange={this.handleFontFaceChange} >
                         {/* <option value="" disabled selected>Font</option> */}
@@ -101,9 +100,7 @@ export class Customise extends React.Component {
                         <option id='Bangers' value='Bangers'>Bangers</option>
                         <option id='RocknRollOne' value='RocknRoll One'>RocknRoll One</option>
                     </select>
-                    </div>
 
-                    <div id='titleFontSize'>
                     <label className='optionLabels'>TITLE FONT SIZE</label>
                     <select className='optionSelectors' id='titleFontSize' onChange={this.handleFontSizeChange} >
                         {/* <option value='' disabled selected>Font Size</option> */}
@@ -112,19 +109,13 @@ export class Customise extends React.Component {
                         <option value='48'>Large</option>
                         <option value='72'>Extra-Large</option>
                     </select>
-                    </div>
 
-                    <div id='fontColour'>
-                    <label className='optionSelectors'  className='optionLabels'>FONT COLOR: </label><br/>
+                    <label className='optionSelectors'  className='optionLabels'>FONT COLOR: </label>
                     <input type='color' value='#000000' onChange={this.handleFontColorChange}/>
-                    </div>
 
-                    <div id='bgColour'>
-                        <label className='optionSelectors' className='optionLabels'>BACKGROUND COLOR: </label><br/>
-                        <input id='bgColorSelector' type='color' value='#FFFFFF' onChange={this.handleBgColorChange}/>
-                    </div>
+                    <label className='optionSelectors' className='optionLabels'>BACKGROUND COLOR: </label>
+                    <input id='bgColorSelector' type='color' value='#FFFFFF' onChange={this.handleBgColorChange}/>
 
-                    <div id='bgType'>
                     <label className='optionLabels'>BACKGROUND PATTERN</label>
                     <select className='optionSelectors' id='backgroundType' onChange={this.handleBackgroundTypeChange} >
                         {/* <option value="" disabled selected>Background Pattern</option> */}
@@ -142,12 +133,13 @@ export class Customise extends React.Component {
                         <option value='map'>World Map</option>
                         <option value='beach'>Beach</option>
                     </select>
-                    </div>
 
-                    <div id='imagesPerRow'>
                     <label className='optionLabels'>IMAGES PER ROW</label>
                     <select className='optionSelectors' id='imgsPerRow' onChange={this.handleDisplayChange} >
                         {/* <option value="" selected disabled>Images Per Row</option> */}
+                        <option value='10'>10</option>
+                        <option value='9'>9</option>
+                        <option value='8'>8</option>
                         <option value='7'>7</option>
                         <option value='6'>6</option>
                         <option value='5'>5</option>
@@ -156,9 +148,7 @@ export class Customise extends React.Component {
                         <option value='2'>2</option>
                         <option value='1'>1</option>
                     </select>
-                    </div>
-
-                    <div id='captionFont'>
+                    
                     <label className='optionLabels'>CAPTION FONT</label>
                     <select className='optionSelectors' id='captionFontFace' onChange={this.handleCaptionFontFaceChange} >
                         {/* <option value="" disabled selected>Caption Font</option> */}
@@ -180,9 +170,7 @@ export class Customise extends React.Component {
                         <option id='Bangers' value='Bangers'>Bangers</option>
                         <option id='RocknRollOne' value='RocknRoll One'>RocknRoll One</option>
                     </select>
-                    </div>
 
-                    <div id='captionFontSize'>
                     <label className='optionLabels'>CAPTION FONT SIZE</label>
                     <select className='optionSelectors' id='captionFontSizeSelector' onChange={this.handleCaptionFontSizeChange} >
                         {/* <option value='' disabled selected>Caption Font Size</option> */}
@@ -191,8 +179,6 @@ export class Customise extends React.Component {
                         <option value='16'>Large</option>
                         <option value='18'>Extra-Large</option>
                     </select>
-                    </div>
-
                     </div>
                 </div>
         )

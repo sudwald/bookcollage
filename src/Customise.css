@@ -16,7 +16,7 @@ h3 {
 
 #titleEntry {
     height:30px;
-    width:300px;
+    width:70%;
     font-family: 'Londrina Solid';
     font-size:24px;
     font-weight: 300;
@@ -27,8 +27,9 @@ h3 {
     margin-top:10px;
     font-size: 12px;
     display:grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-gap:10px;
+    grid-template-columns: repeat(3, 3fr 2fr);
+    column-gap: 3px;
+    row-gap:2px;
     grid-auto-flow: row;
 }
 
@@ -36,15 +37,12 @@ h3 {
     font-family: 'Londrina Solid';
     font-weight:300;
     font-size:14px;
-    min-width:120px;
-}
-
-select {
-    text-align-last: center;
+    width:70px;
 }
 
 .optionLabels{
     font-size:10px;
+    text-align: justify;
 }
 
 #OpenSans{
