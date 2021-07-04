@@ -18,6 +18,7 @@ import closeicon from './Images/closeicon.png'
 import removeicon from './Images/removeicon.png'
 import lefticon from './Images/lefticon.png'
 import righticon from './Images/righticon.png'
+import downicon from './Images/downicon.png'
 import caption from './Images/caption.png'
 import html2canvas from 'html2canvas';
 import downloadjs from 'downloadjs';
@@ -392,13 +393,23 @@ export class PhotoBox extends React.Component {
             // document.body.appendChild(canvas);
         // });
 
+        const collage = document.getElementById('Collage')
+        window.scrollTo(0,0)
         this.base64Converter()
         setTimeout(function(){
-            html2canvas(document.body)
+            html2canvas(collage, {    
+                // proxy: "../html2canvas-proxy/server.js",
+                useCORS: true,
+                height: window.outerHeight + window.innerHeight,
+                windowHeight: window.outerHeight + window.innerHeight,
+                scrollY: -window.scrollY,
+                // onrendered: function(canvas) {document.body.appendChild(canvas)}
+            })
             .then(function(canvas) {
                 document.body.appendChild(canvas);
             })
-        }, 5000)        
+            }, 3000)
+        alert("done")
     }
 
         // const divText = document.getElementById('Collage').outerHTML
@@ -444,7 +455,8 @@ export class PhotoBox extends React.Component {
                     <Customise displayChange={this.displayChange} alignmentChange={this.alignmentChange} bgColorChange={this.bgColorChange} titleChange={this.titleChange} fontSizeChange={this.fontSizeChange} fontFaceChange={this.fontFaceChange} fontColorChange={this.fontColorChange} backgroundTypeChange={this.backgroundTypeChange} captionFontFaceChange={this.captionFontFaceChange} captionFontSizeChange={this.captionFontSizeChange} />
                     </div>
                 </div>
-
+                <p id='printScreenInstructions'>When you're done, print screen your collage or use a program like Snipping Tool to capture and save it :)</p>
+                <img id='downIcon' src={downicon}/>
                 <div id='Collage'>
                     <p id='collageTitle'></p>
                     <div id='PhotoBox'>
@@ -459,6 +471,10 @@ export class PhotoBox extends React.Component {
                 {/* <button onClick={this.generateImg}>Save Image</button> */}
 
                 <div id='popUpDialog' style={this.state.dialogStyle}>
+                    <div id='closeIconDiv'>
+                        <img src={closeicon} id='closeIcon' onClick={this.togglePopUpOff}/><br/>
+                    </div>
+                   
                    <div id='showBook'>
                        <img src={this.state.imgUrlTemp}/>
                    </div>
@@ -518,10 +534,6 @@ export class PhotoBox extends React.Component {
                         <p className='starRatingP'>5</p>
                         </div> 
                         <button id='clearRating' onClick={this.clearRating}>Clear star rating</button>
-
-                        <span id='iconHolder'>
-                            <img src={closeicon} id='closeIcon' onClick={this.togglePopUpOff}/>
-                        </span>
                    </div>
                    </div>
             </div>      
