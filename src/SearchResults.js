@@ -23,7 +23,12 @@ export class SearchResults extends React.Component {
                 {/* maps the jsonArray to extract the image url ("thumbnail") and invokes an instance of ImageResult in each case */}
                     {/* checks that there actually is a thumbnail property, skips it if the item has no image */}
                     {
-                        !foundSearchResults? <div id='noResults'>No search results found</div> : 
+                        !foundSearchResults? 
+                            <div id='noResults'>
+                                <p>No search results found</p>
+                                <p id='noResultsFurtherInfo'>This website uses data from <a href='https://books.google.com/' target="_blank">Google Books</a>. If you can't find the book you're looking for, try visiting Google Books to check the book you're looking for is in their database and has a cover image. This website will only pull through search results which have a cover image in Google Books.<br/><br/> You can also search by IBSN in the title field.</p>
+                            </div>
+                            : 
                         this.props.jsonArray.filter(item => item.volumeInfo?.imageLinks?.thumbnail)
                         .map(item => {
                         // return an instance of ImageResult for each thumbnail, also passes it the ability to add a photo, the toRestore tracker variable and access to the restore function
