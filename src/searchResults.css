@@ -27,3 +27,9 @@
 .searchResults h3 {
     margin-top:10px;
 }
+
+#noResults {
+    width: 50vw;
+    font-family: 'Londrina Solid';
+    font-size: 24px;
+}

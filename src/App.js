@@ -17,6 +17,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      jsonFullObject: [],
       // jsonArray holds the .items[...] array of search results returned by the Google Books API
       jsonArray: [],
       // photoBoxArray holds an array of the urls of images the user has shortlisted for their collage
@@ -81,7 +82,24 @@ class App extends React.Component {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${combinedSearchTerm}&intitle:${titleSearchTerm}&inauthor:${authorSearchTerm}&printType=books&maxResults=40`)
         .then(response => response.json())
         // takes only the .items[...] array from the json response and stores it in state.jsonArray, this is the only part of the json response we will work with
-        .then(data => this.setState({jsonArray: data.items}))
+        .then(data => 
+          this.setState({jsonArray: data.items}))
+        
+    /*
+        alert(JSON.stringify(this.state.jsonFullObject))
+        if(this.state.jsonFullObject.totalItems > 0) {
+          this.setState({jsonArray: this.state.jsonFullObject.items})
+          alert("there were items! items were: " + (JSON.stringify(this.state.jsonArray)))
+        }
+        else {
+          this.setState({jsonArray: []})
+          alert("there were no items, json array is empty")
+        }
+    
+    if(!this.state.jsonArray) {
+      alert("No search results!")
+    }
+    */
 
     if (this.state.firstLoad) {
       this.setState({loadContent:{display: 'inline'}})
