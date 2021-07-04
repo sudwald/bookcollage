@@ -77,7 +77,6 @@ class App extends React.Component {
   // fetches search results from the Google Books API
   search(titleSearchTerm, authorSearchTerm) {
     const combinedSearchTerm = titleSearchTerm + " " + authorSearchTerm
-    alert(`https://www.googleapis.com/books/v1/volumes?q=${combinedSearchTerm}&intitle:${titleSearchTerm}&inauthor:${authorSearchTerm}&printType=books&maxResults=40`)
     // carries out the search using the indicated search term
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${combinedSearchTerm}&intitle:${titleSearchTerm}&inauthor:${authorSearchTerm}&printType=books&maxResults=40`)
         .then(response => response.json())

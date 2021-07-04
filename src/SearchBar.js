@@ -30,7 +30,6 @@ export class SearchBar extends React.Component {
     //   calls the search function using the searchTerm
     handleSearch() {
         if (this.state.authorSearchTerm || this.state.titleSearchTerm) {
-          alert("search submitted, sending title search term " + this.state.titleSearchTerm + " and author search term " + this.state.authorSearchTerm)
           this.props.onSearch(this.state.titleSearchTerm, this.state.authorSearchTerm)
         }
     }
