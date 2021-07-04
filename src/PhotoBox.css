@@ -52,9 +52,10 @@
 
 #PhotoBoxHeader {
     display:grid;
-    grid-template-columns: 2fr 2fr;
+    grid-template-columns: 2fr 5fr;
     grid-template-rows: 50px auto;
-    gap: 20px;
+    column-gap: 30px;
+    row-gap:20px;
     grid-template-areas: "customiseHeader customiseHeader" "customiseInstructions customiseOptions";
 }
 

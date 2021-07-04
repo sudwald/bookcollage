@@ -39,6 +39,10 @@ h3 {
     min-width:120px;
 }
 
+select {
+    text-align-last: center;
+}
+
 .optionLabels{
     font-size:10px;
 }
