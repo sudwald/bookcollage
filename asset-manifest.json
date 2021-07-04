@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/bookcollage/static/css/main.3ec30737.chunk.css",
-    "main.js": "/bookcollage/static/js/main.8f022e75.chunk.js",
-    "main.js.map": "/bookcollage/static/js/main.8f022e75.chunk.js.map",
+    "main.css": "/bookcollage/static/css/main.45a5db67.chunk.css",
+    "main.js": "/bookcollage/static/js/main.07516ac2.chunk.js",
+    "main.js.map": "/bookcollage/static/js/main.07516ac2.chunk.js.map",
     "runtime-main.js": "/bookcollage/static/js/runtime-main.0dfb304f.js",
     "runtime-main.js.map": "/bookcollage/static/js/runtime-main.0dfb304f.js.map",
     "static/js/2.da674c7c.chunk.js": "/bookcollage/static/js/2.da674c7c.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.e0f39154.chunk.js": "/bookcollage/static/js/3.e0f39154.chunk.js",
     "static/js/3.e0f39154.chunk.js.map": "/bookcollage/static/js/3.e0f39154.chunk.js.map",
     "index.html": "/bookcollage/index.html",
-    "static/css/main.3ec30737.chunk.css.map": "/bookcollage/static/css/main.3ec30737.chunk.css.map",
+    "static/css/main.45a5db67.chunk.css.map": "/bookcollage/static/css/main.45a5db67.chunk.css.map",
     "static/js/2.da674c7c.chunk.js.LICENSE.txt": "/bookcollage/static/js/2.da674c7c.chunk.js.LICENSE.txt",
     "static/media/beach.029bc2ff.png": "/bookcollage/static/media/beach.029bc2ff.png",
     "static/media/bookbg.785868ef.png": "/bookcollage/static/media/bookbg.785868ef.png",
@@ -30,7 +30,7 @@
   "entrypoints": [
     "static/js/runtime-main.0dfb304f.js",
     "static/js/2.da674c7c.chunk.js",
-    "static/css/main.3ec30737.chunk.css",
-    "static/js/main.8f022e75.chunk.js"
+    "static/css/main.45a5db67.chunk.css",
+    "static/js/main.07516ac2.chunk.js"
   ]
 }
