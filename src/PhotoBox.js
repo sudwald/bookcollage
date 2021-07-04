@@ -455,8 +455,10 @@ export class PhotoBox extends React.Component {
                     <Customise displayChange={this.displayChange} alignmentChange={this.alignmentChange} bgColorChange={this.bgColorChange} titleChange={this.titleChange} fontSizeChange={this.fontSizeChange} fontFaceChange={this.fontFaceChange} fontColorChange={this.fontColorChange} backgroundTypeChange={this.backgroundTypeChange} captionFontFaceChange={this.captionFontFaceChange} captionFontSizeChange={this.captionFontSizeChange} />
                     </div>
                 </div>
+                <div>
                 <p id='printScreenInstructions'>When you're done, print screen your collage or use a program like Snipping Tool to capture and save it :)</p>
                 <img id='downIcon' src={downicon}/>
+                </div>
                 <div id='Collage'>
                     <p id='collageTitle'></p>
                     <div id='PhotoBox'>
