@@ -153,6 +153,7 @@ class App extends React.Component {
     const newPosition = currentPosition - 1
     this.state.photoBoxArray.splice(currentPosition, 1)
     this.state.photoBoxArray.splice(newPosition, 0, imgUrl)
+    this.setState({photoBoxArray: this.state.photoBoxArray})
   }
 
   moveRight(imgUrl) {
@@ -160,6 +161,7 @@ class App extends React.Component {
     const newPosition = currentPosition + 1
     this.state.photoBoxArray.splice(currentPosition, 1)
     this.state.photoBoxArray.splice(newPosition, 0, imgUrl)
+    this.setState({photoBoxArray: this.state.photoBoxArray})
   }
 
   render() {

@@ -24,12 +24,16 @@ export class PhotoBoxItem extends React.Component {
         if (currentCaptionCheck) {
             currentCaption = currentCaptionCheck.caption
         }
+        let captionStyles = {
+            fontFamily: this.props.captionFontFamily,
+            fontSize: this.props.captionFontSize
+        }
         return (               
                <React.Fragment>
                <span id='photoBoxImgContainer'>
                <img id={this.props.imgUrl} className='photoBoxImg' src={this.props.imgUrl} onClick = {this.handleClick}/>
                        {
-                        currentCaption && <div id={this.props.imgUrl} class='captionLabel'>{currentCaption}</div>
+                        currentCaption && <div id={this.props.imgUrl} class='captionLabel' style={captionStyles}>{currentCaption}</div>
                        }
                    {   
                         //

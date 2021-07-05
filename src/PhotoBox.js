@@ -33,7 +33,9 @@ export class PhotoBox extends React.Component {
             leftButtonDisabled: false,
             rightButtonDisabled: false,
             stars: [],
-            captions: []
+            captions: [],
+            captionFontFamily: `'Londrina Solid'`,
+            captionFontSize: '12px'
         }
         this.displayChange = this.displayChange.bind(this)
         this.alignmentChange = this.alignmentChange.bind(this)
@@ -107,12 +109,15 @@ export class PhotoBox extends React.Component {
     }
 
     captionFontSizeChange(size) {
-        if (this.state.captions.length > 0) {
-            const captions = document.querySelectorAll("div.captionLabel")
-            for (let i=0; i<captions.length; i++) {
-                captions[i].style.fontSize = `${size}px`
-            }
-            }
+        const fontSize = `${size}px`
+        this.setState({captionFontSize: fontSize})
+        
+        // if (this.state.captions.length > 0) {
+        //     const captions = document.querySelectorAll("div.captionLabel")
+        //     for (let i=0; i<captions.length; i++) {
+        //         captions[i].style.fontSize = `${size}px`
+        //     }
+        //     }
       }
       
       fontFaceChange(font) {
@@ -120,12 +125,14 @@ export class PhotoBox extends React.Component {
       }
       
       captionFontFaceChange(font) {
-        if (this.state.captions.length > 0) {
-        const captions = document.querySelectorAll("div.captionLabel")
-        for (let i=0; i<captions.length; i++) {
-            captions[i].style.fontFamily = font
-        }
-        }
+        const newFont = `'${font}'`
+        this.setState({captionFontFamily: newFont})
+        // if (this.state.captions.length > 0) {
+        // const captions = document.querySelectorAll("div.captionLabel")
+        // for (let i=0; i<captions.length; i++) {
+        //     captions[i].style.fontFamily = font
+        // }
+        // }
       }
 
     backgroundTypeChange(bgType, currentColor) {
@@ -464,7 +471,7 @@ export class PhotoBox extends React.Component {
                     <div id='PhotoBox'>
                         {
                         this.props.photoBoxArray.map(item => {
-                        return <PhotoBoxItem imgUrl={item} togglePopUp={this.togglePopUp} stars={this.state.stars} captions={this.state.captions} updateImgToggleArray={this.props.updateImgToggleArray} />
+                        return <PhotoBoxItem imgUrl={item} togglePopUp={this.togglePopUp} stars={this.state.stars} captions={this.state.captions} updateImgToggleArray={this.props.updateImgToggleArray} captionFontSize={this.state.captionFontSize} captionFontFamily={this.state.captionFontFamily} />
                         })
                         }
                     </div>
