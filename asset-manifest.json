@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/bookcollage/static/css/main.48a77045.chunk.css",
-    "main.js": "/bookcollage/static/js/main.8ba2255b.chunk.js",
-    "main.js.map": "/bookcollage/static/js/main.8ba2255b.chunk.js.map",
-    "runtime-main.js": "/bookcollage/static/js/runtime-main.0dfb304f.js",
-    "runtime-main.js.map": "/bookcollage/static/js/runtime-main.0dfb304f.js.map",
-    "static/js/2.da674c7c.chunk.js": "/bookcollage/static/js/2.da674c7c.chunk.js",
-    "static/js/2.da674c7c.chunk.js.map": "/bookcollage/static/js/2.da674c7c.chunk.js.map",
-    "static/js/3.e0f39154.chunk.js": "/bookcollage/static/js/3.e0f39154.chunk.js",
-    "static/js/3.e0f39154.chunk.js.map": "/bookcollage/static/js/3.e0f39154.chunk.js.map",
+    "main.css": "/bookcollage/static/css/main.7262f489.chunk.css",
+    "main.js": "/bookcollage/static/js/main.fbc7015e.chunk.js",
+    "main.js.map": "/bookcollage/static/js/main.fbc7015e.chunk.js.map",
+    "runtime-main.js": "/bookcollage/static/js/runtime-main.6bc76d2c.js",
+    "runtime-main.js.map": "/bookcollage/static/js/runtime-main.6bc76d2c.js.map",
+    "static/js/2.df25b119.chunk.js": "/bookcollage/static/js/2.df25b119.chunk.js",
+    "static/js/2.df25b119.chunk.js.map": "/bookcollage/static/js/2.df25b119.chunk.js.map",
+    "static/js/3.acb5662e.chunk.js": "/bookcollage/static/js/3.acb5662e.chunk.js",
+    "static/js/3.acb5662e.chunk.js.map": "/bookcollage/static/js/3.acb5662e.chunk.js.map",
     "index.html": "/bookcollage/index.html",
-    "static/css/main.48a77045.chunk.css.map": "/bookcollage/static/css/main.48a77045.chunk.css.map",
-    "static/js/2.da674c7c.chunk.js.LICENSE.txt": "/bookcollage/static/js/2.da674c7c.chunk.js.LICENSE.txt",
+    "static/css/main.7262f489.chunk.css.map": "/bookcollage/static/css/main.7262f489.chunk.css.map",
+    "static/js/2.df25b119.chunk.js.LICENSE.txt": "/bookcollage/static/js/2.df25b119.chunk.js.LICENSE.txt",
     "static/media/beach.029bc2ff.png": "/bookcollage/static/media/beach.029bc2ff.png",
     "static/media/bookbg.785868ef.png": "/bookcollage/static/media/bookbg.785868ef.png",
     "static/media/coffee.828f6acb.png": "/bookcollage/static/media/coffee.828f6acb.png",
@@ -29,9 +29,9 @@
     "static/media/world.883f62c7.png": "/bookcollage/static/media/world.883f62c7.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.0dfb304f.js",
-    "static/js/2.da674c7c.chunk.js",
-    "static/css/main.48a77045.chunk.css",
-    "static/js/main.8ba2255b.chunk.js"
+    "static/js/runtime-main.6bc76d2c.js",
+    "static/js/2.df25b119.chunk.js",
+    "static/css/main.7262f489.chunk.css",
+    "static/js/main.fbc7015e.chunk.js"
   ]
 }
