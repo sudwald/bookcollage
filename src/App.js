@@ -1,156 +1,121 @@
-//PRESENTATION: <SEARCHBAR/>, <SEARCHRESULTS/>, AND <PHOTOBOX/>
-//FUNCTIONALITY: 
-  //SEARCH() - RETRIEVES SEARCH RESULTS FROM GOOGLE API
-  //ADDPHOTO - ADDS A PHOTO TO USER'S COLLAGE
-  //REMOVEPHOTO - REMOVES A PHOTO FROM USER'S COLLAGE
-  //RESTORERESET - RESTORES A REMOVED PHOTO TO THE SEARCH RESULTS
+/* 
+CHILD COMPONENTS: <SEARCHBAR/>, <SEARCHRESULTS/>, <PHOTOBOX/>
+
+FUNCTIONS: 
+  SEARCH() - RETRIEVES SEARCH RESULTS FROM GOOGLE API
+  ADDPHOTO() - ADDS A PHOTO TO USER'S COLLAGE
+  REMOVEPHOTO() - REMOVES A PHOTO FROM USER'S COLLAGE
+  UPDATEIMGTOGGLEARRAY() - MANAGES IMGS APPEARING/DISAPPEARING WHEN ADDED/REMOVED FROM SEARCH RESUSLTS/COLLAGE
+  MOVELEFT() - MOVES A PHOTO LEFT IN THE COLLAGE
+  MOVERIGHT() - DITTO
+
+PROPS: none
+
+STATE:
+  JSONARRAY - HOLDS THE SEARCH RESULTS FROM GOOGLE BOOKS API 
+  PHOTOBOXARRAY - HOLDS AN ARRAY OF URLS OF BOOKS SELECTED FOR THE COLLAGE BY THE USER
+  IMGTOGGLEARRAY - HOLDS DISPLAY INFO FOR PHOTOS WHICH HAVE BEEN ADDED/REMOVED 
+  FIRSTLOAD -  BOOLEAN INDICATING IF THIS IS USER'S FIRST SEARCH
+  LOADCONTENT - BOOLEAN USED TO CONTROL DISPLAY OF SEARCH RESULTS/COLLAGE
+  HIDEHEADER - BOOLEAN USED TO CONTROL DISPLAY OF HEADER
+
+PROPS PASSED:
+  <SearchBar /> - STATE.HIDEHEADER, SEARCH()
+  <SearchResults /> - STATE.LOADCONTENT, STATE.JSONARRAY, STATE.IMGTOGGLEARRAY, ADDPHOTO(), UPDATEIMGTOGGLEARRAY()
+  <PhotoBox /> - STATE.PHOTOBOXARRAY, STATE.LOADCONTENT, REMOVEPHOTO(), MOVELEFT(), MOVERIGHT(), UPDATEIMGTOGGLEARRAY()
+*/
 
 import './App.css';
 import React from 'react';
 import { SearchBar } from './SearchBar';
 import { SearchResults } from './SearchResults';
 import { PhotoBox } from './PhotoBox';
-import { Notification } from './Notification';
-import html2canvas from 'html2canvas';
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      jsonFullObject: [],
-      // jsonArray holds the .items[...] array of search results returned by the Google Books API
-      jsonArray: [],
-      // photoBoxArray holds an array of the urls of images the user has shortlisted for their collage
-      photoBoxArray: [],
-      // photoToRestore temporarily holds the URL of a photo which needs to be made visible in the search results again as the user has removed it from their collage
-      photoToRestore: '',
-      firstLoad: true,
-      notificationStyle: {display: 'none'},
-      loadContent: {display: 'none'},
-      hideHeader: {display: 'block'},
-      imgToggleArray: []
+      jsonArray: [], //HOLDS SEARCH RESULTS FROM GOOGLE BOOKS
+      photoBoxArray: [], //HOLDS URLS OF IMAGES SELECTED BY USER FOR THEIR COLLAGE
+      imgToggleArray: [], //HOLDS DISPLAY INFO FOR IMAGES ADDED/REMOVED FROM COLLAGE
+      firstLoad: true, //BOOLEAN USED TO LOAD A SIMPLIFIED INTERFACE THEN EXPAND WHEN USER PERFORMS FIRST SEARCH
+      loadContent: {display: 'none'}, //BOOLEAN USED TO DISPLAY FULL CONTENT WHEN USER PERFORMS FIRST SEARCH
+      hideHeader: {display: 'block'} //BOOLEAN USED TO HIDE SIMPLIFIED INTERFACE WHEN USER PERFORMS FIRST SEARCH
     }
     this.search = this.search.bind(this)
     this.addPhoto = this.addPhoto.bind(this)
     this.removePhoto = this.removePhoto.bind(this)
-    this.restoreReset = this.restoreReset.bind(this)
-    this.moveLeft = this.moveLeft.bind(this)
-    this.moveRight = this.moveRight.bind(this)
+    this.moveImage = this.moveImage.bind(this)
     this.updateImgToggleArray = this.updateImgToggleArray.bind(this)
   }
 
   // called when user clicks a search result to add it to their collage
-  addPhoto(photoUrl) {
-    let photos = this.state.photoBoxArray
+  addPhoto(photoUrl) { //FUNCTION TO ADD A PHOTO FROM THE SEARCH RESULTS TO THE USER'S COLLAGE
+    let photos = this.state.photoBoxArray //CREATE A TEMP DUPLICATE OF THE CURRENT COLLAGE
     // checks photo isn't already in the collage
-    if(photos.find(savedPhoto => savedPhoto === photoUrl)) {
+    if(photos.find(savedPhoto => savedPhoto === photoUrl)) { //CHECK IF PHOTO IS ALREADY IN THE COLLAGE, IF SO DO NOTHING
       return
     }
-    // add the url of the clicked photo to the PhotoBox array
-    photos.push(photoUrl)
-    // update the PhotoBox array
-    this.setState({photoBoxArray: photos})
-    // this.setState({notificationText: 'Added!'})
-    // this.setState({notificationStyle: {display:"inline"}})
-    // setInterval(() => this.setState({notificationStyle: {display: "none"}}),2000)
-  }
-  
-  // once a photo has been removed from the collage and reinstated to the search results, this function resets the tracker variable which tells ImageResult if an image needs restoring
-  restoreReset() {
-    this.setState({photoToRestore: ''})
+    photos.push(photoUrl) //OTHERWISE PUSH THE URL OF THE SELECTED PHOTO TO THE TEMP ARRAY
+    this.setState({photoBoxArray: photos}) //UPDATE STATE WTIH THE TEMP ARRAY
   }
 
-  // called when user clicks an image in their collage to remove it
-  removePhoto(photoUrl) {
-    let photos = this.state.photoBoxArray
-    // creates a new PhotoBoxArray minus the image the user no longer wants 
-    photos = photos.filter(selectedToRemove => selectedToRemove !== photoUrl)
-    // updates the photoBoxArray
-    this.setState({photoBoxArray: photos})
-    // sets the tracker variable photoToRestore to indicate to ImageResult that a removed image needs reinstating to the search results
-    this.setState({notificationText: 'Removed!'})
-    this.setState({notificationStyle: {display:"inline"}})
-    setTimeout(() => this.setState({notificationStyle: {display: "none"}}),2000)
-    this.setState({photoToRestore: photoUrl})
-    this.updateImgToggleArray('removed',photoUrl)
+  removePhoto(photoUrl) { //FUNCTION TO REMOVE AN IMAGE FROM THE COLLAGE
+    let photos = this.state.photoBoxArray //CREATE A TEMP DUPLICATE OF THE CURRENT COLLAGE
+    photos = photos.filter(selectedToRemove => selectedToRemove !== photoUrl) //FILTER THE CHOSEN PHOTO OUT OF THE PHOTOBOX ARRAY
+    this.setState({photoBoxArray: photos}) //UPDATE STATE WITH THE FILTERED ARRAY
+    this.updateImgToggleArray('removed',photoUrl) //CALL FUNCTION WHICH WILL MAKE THE REMOVED PHOTO VISIBLE IN SEARCH RESULTS AGAIN
   }
   
-  // fetches search results from the Google Books API
-  search(titleSearchTerm, authorSearchTerm) {
-    const combinedSearchTerm = titleSearchTerm + " " + authorSearchTerm
-    // carries out the search using the indicated search term
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${combinedSearchTerm}&intitle:${titleSearchTerm}&inauthor:${authorSearchTerm}&printType=books&maxResults=40`)
+  search(titleSearchTerm, authorSearchTerm) { //FUNCTION TO PERFORM A SEARCH / RETRIEVE DATA FROM GOOGLE BOOKS API 
+    const combinedSearchTerm = titleSearchTerm + " " + authorSearchTerm //A GENERIC SEARCH TERM (Q=) IS MANDATORY - CONCATENATE AUTHOR AND TITLE SEARCH TERMS TO MAKE ONE
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${combinedSearchTerm}&intitle:${titleSearchTerm}&inauthor:${authorSearchTerm}&printType=books&maxResults=40`) //CARRY OUT SEARCH USING CONCATENATED/GENERIC SEARCH TERM (Q=) AND AUTHOR/TITLE SPECIFIC SEARCHES
         .then(response => response.json())
-        // takes only the .items[...] array from the json response and stores it in state.jsonArray, this is the only part of the json response we will work with
         .then(data => 
-          this.setState({jsonArray: data.items}))
-        
-    /*
-        alert(JSON.stringify(this.state.jsonFullObject))
-        if(this.state.jsonFullObject.totalItems > 0) {
-          this.setState({jsonArray: this.state.jsonFullObject.items})
-          alert("there were items! items were: " + (JSON.stringify(this.state.jsonArray)))
-        }
-        else {
-          this.setState({jsonArray: []})
-          alert("there were no items, json array is empty")
-        }
-    
-    if(!this.state.jsonArray) {
-      alert("No search results!")
-    }
-    */
+          this.setState({jsonArray: data.items})) //ISOLATES .ITEMS ARRAY FROM THE RETURNED JSON, THIS CONTAINS THE COVER IMAGE THUMBNAILS
 
-    if (this.state.firstLoad) {
-      this.setState({loadContent:{display: 'inline'}})
-      this.setState({hideHeader:{display: 'none'}})
+    if (this.state.firstLoad) { //IF THIS IS THE USER'S FIRST SEARCH...
+      this.setState({loadContent:{display: 'inline'}}) //DISPLAY THE FULL UI
+      this.setState({hideHeader:{display: 'none'}}) //HIDE THE SIMPLIFIED LOAD UI
     }
   }
 
-  updateImgToggleArray(direction, imgUrl) {
-    let newImgStyleArray = this.state.imgToggleArray;
-    let found = false;
-    let foundAt = 0;
-    const hidden = {display:"none"};
-    const visible = {display:"block"};
+  updateImgToggleArray(direction, imgUrl) { //FUNCTION WHICH SHOWS/HIDES IMAGES IN THE SEARCH RESULTS DEPENDING ON IF THEY'RE IN THE USER'S COLLAGE
+    let newImgStyleArray = this.state.imgToggleArray; //TEMP DUPLICATE OF CURRENT IMG DISPLAY ARRAY
+    let found = false; //SET DEFAULT VALUE FOR ARRAY SEARCH
+    let foundAt = 0; //SET DEFAULT VALUE FOR ARRAY SEARCH
+    const hidden = {display:"none"}; //SETS DISPLAY CSS FOR A HIDDEN ELEMENT
+    const visible = {display:"block"}; //SETS DISPLAY CSS FPR A VISIBLE ELEMENT
 
-    for (let i=0; i<newImgStyleArray.length;i++) {
-        if (newImgStyleArray[i].imgID === imgUrl) {
-            found = true;
-            foundAt = i;
-            break;
+    for (let i=0; i<newImgStyleArray.length;i++) { //LOOP THROUGH CURRENT ARRAY TO CHECK IF DISPLAY PROPERTIES ALREADY SET FOR THIS IMAGE - I.E. IMAGE ALREADY ADDED TO COLLAGE OR REMOVED FROM COLLAGE
+        if (newImgStyleArray[i].imgID === imgUrl) { //IF URL IS ALREADY IN THE ARRAY
+            found = true; //SET FOUND TO TRUE 
+            foundAt = i; //SET FOUNDAT TO INDEX IT WAS FOUND AT 
+            break; //STOP LOOPING
         }
     }
 
-    if(found) { 
-      if(direction === 'added') {
-            newImgStyleArray[foundAt].displayStyle = hidden    
+    if(found) {  //IF IT WAS FOUND...
+      if(direction === 'added') { //IF IT'S BEING ADDED TO THE COLLAGE...
+            newImgStyleArray[foundAt].displayStyle = hidden     //IT SHOULD DISPAPPEAR FROM THE SEARCH RESULTS
         }
-        else {
-            newImgStyleArray[foundAt].displayStyle = visible    
+        else { //IF IT'S BEING REMOVED FROM THE COLLAGE
+            newImgStyleArray[foundAt].displayStyle = visible    //IT SHOULD APPEAR IN THE SEARCH RESULTS AGAIN
         }
     }
 
-    else {
-        if (direction='added') {  
-            newImgStyleArray.push({
-                imgID: imgUrl,
-                displayStyle: hidden,
+    else { //IF IT WASN'T FOUND
+            newImgStyleArray.push({ //PUSH A NEW ENTRY TO THE IMG STYLE ARRAY... 
+                imgID: imgUrl, //...USING THE URL AS THE IDENTIFIER...
+                displayStyle: hidden, //...AND HIDING THE RELEVANT IMAGE IN THE SEARCH RESULTS
             })
-        }
-        else {
-            newImgStyleArray.push({
-                imgID: imgUrl,
-                displayStyle: visible, 
-           })
-        }
     }
-    this.setState({imgToggleArray: newImgStyleArray})
+    this.setState({imgToggleArray: newImgStyleArray}) //PUSH TEMP ARRAY TO STATE
 }
 
-  moveLeft(imgUrl) {
+  moveImage(direction, imgUrl) {
     const currentPosition = this.state.photoBoxArray.indexOf(imgUrl)
-    const newPosition = currentPosition - 1
+    const newPosition = direction === 'left'? currentPosition - 1: currentPosition + 1
     this.state.photoBoxArray.splice(currentPosition, 1)
     this.state.photoBoxArray.splice(newPosition, 0, imgUrl)
     this.setState({photoBoxArray: this.state.photoBoxArray})
@@ -169,11 +134,10 @@ class App extends React.Component {
       <div className="App">
         {/* passes SearchBar the ability to conduct an API search */}
         <SearchBar hideHeader={this.state.hideHeader} onSearch={this.search} />
-        {/* passes SearchResults the results of the search, access to add a photo,  access to the toRestore tracker variable, and access to the restore function should an image need to be reinstated in the search results*/}
-        <SearchResults loadContent={this.state.loadContent} jsonArray={this.state.jsonArray} onAdd={this.addPhoto} toRestore={this.state.photoToRestore} restoreReset={this.restoreReset} updateImgToggleArray={this.updateImgToggleArray} imgToggleArray={this.state.imgToggleArray}/>
+        {/* passes SearchResults the results of the search, access to add a photo*/}
+        <SearchResults loadContent={this.state.loadContent} jsonArray={this.state.jsonArray} onAdd={this.addPhoto} updateImgToggleArray={this.updateImgToggleArray} imgToggleArray={this.state.imgToggleArray}/>
         {/* passes PhotoBox the array of the user's chosen collage photos and the ability to remove a photo from the collage */}
-        <PhotoBox loadContent={this.state.loadContent} photoBoxArray={this.state.photoBoxArray} onRemove={this.removePhoto} moveLeft={this.moveLeft} moveRight={this.moveRight} updateImgToggleArray={this.updateImgToggleArray}/>
-        <Notification notificationStyle={this.state.notificationStyle} notificationText={this.state.notificationText}/>
+        <PhotoBox loadContent={this.state.loadContent} photoBoxArray={this.state.photoBoxArray} onRemove={this.removePhoto} moveImage={this.moveImage} updateImgToggleArray={this.updateImgToggleArray}/>
       </div>
     );
   }

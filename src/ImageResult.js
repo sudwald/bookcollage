@@ -1,4 +1,4 @@
-//PRESENTATION: RENDERS ONE IMAGE PER SEARCH RESULT AND RENDERS A POP-UP NOTIFICATION WHEN
+//PRESENTATION: RENDERS ONE IMAGE PER SEARCH RESULT
 //FUNCTIONALITY: FILTERS ONLY THE IMAGES FROM THE JSON RESPONSE AND MAPS THEM INTO <IMAGERESULT /> INSTANCES
 
 import React from 'react'
@@ -8,12 +8,6 @@ export class ImageResult extends React.Component {
         super(props)
         this.handleAdd = this.handleAdd.bind(this)
         this.handleUpdateToggleArray = this.handleUpdateToggleArray.bind(this)
-    }
-
-    componentDidUpdate() {
-        if(this.props.toRestore === this.props.imgUrl) {
-            this.props.restoreReset()
-        }
     }
 
     handleAdd() {

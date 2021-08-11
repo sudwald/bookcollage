@@ -31,8 +31,8 @@ export class SearchResults extends React.Component {
                             : 
                         this.props.jsonArray.filter(item => item.volumeInfo?.imageLinks?.thumbnail)
                         .map(item => {
-                        // return an instance of ImageResult for each thumbnail, also passes it the ability to add a photo, the toRestore tracker variable and access to the restore function
-                        return <ImageResult imgUrl={item.volumeInfo.imageLinks.thumbnail} onAdd={this.props.onAdd}  toRestore={this.props.toRestore} restoreReset={this.props.restoreReset} updateImgToggleArray={this.props.updateImgToggleArray} imgToggleArray={this.props.imgToggleArray}/>
+                        // return an instance of ImageResult for each thumbnail, also passes it the ability to add a photo
+                        return <ImageResult imgUrl={item.volumeInfo.imageLinks.thumbnail} onAdd={this.props.onAdd} updateImgToggleArray={this.props.updateImgToggleArray} imgToggleArray={this.props.imgToggleArray}/>
                     })
                     }
                 </div>

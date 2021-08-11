@@ -42,3 +42,22 @@
     transform: rotate(360deg);
   }
 }
+
+/* MEDIA QUERY FOR PORTRAIT MOBILE */
+@media screen and (max-width: 500px) {
+  .App {
+    display:none;
+  }
+  body::after {
+    content: "Please rotate your device to use this web application";
+    position: absolute;
+    width: 90%;
+    height:100%;
+    top:40%;
+    left:0;
+    text-align:center;
+    overflow:hidden;
+    font-size:24px;
+    padding:5%;
+  }
+}

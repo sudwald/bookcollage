@@ -58,6 +58,7 @@ export class PhotoBox extends React.Component {
         this.captionFontFaceChange = this.captionFontFaceChange.bind(this)
         this.captionFontSizeChange = this.captionFontSizeChange.bind(this)
         this.handleKeyUp = this.handleKeyUp.bind(this)
+        this.handleMoveButtons = this.handleMoveButtons.bind(this)
     }
 
     displayChange(itemsPerRow) {        
@@ -270,22 +271,24 @@ export class PhotoBox extends React.Component {
     }
 
     handleLeft() {
-        this.props.moveLeft(this.state.imgUrlTemp)
-        if (this.props.photoBoxArray.indexOf(this.state.imgUrlTemp) === 0) {
-            this.state.leftButtonDisabled = true;
-        }
-        else {
-            this.state.leftButtonDisabled = false;
-        }
+        this.props.moveImage('left', this.state.imgUrlTemp)
+        this.handleMoveButtons()
     }
 
     handleRight() {
-        this.props.moveRight(this.state.imgUrlTemp)
-        if (this.props.photoBoxArray.indexOf(this.state.imgUrlTemp) === (this.props.photoBoxArray.length - 1)) {
-            this.state.rightButtonDisabled = true;
+        this.props.moveImage('right', this.state.imgUrlTemp)
+        this.handleMoveButtons()
+    }
+
+    handleMoveButtons() {
+        this.setState({leftButtonDisabled: false})
+        this.setState({rightButtonDisabled: false})
+
+        if (this.props.photoBoxArray.indexOf(this.state.imgUrlTemp) === 0) {
+            this.setState({leftButtonDisabled: true})
         }
-        else {
-            this.state.rightButtonDisabled = false;
+        else if (this.props.photoBoxArray.indexOf(this.state.imgUrlTemp) === (this.props.photoBoxArray.length - 1)) {
+            this.setState({rightButtonDisabled: true})
         }
     }
 
